@@ -48,9 +48,9 @@ function App() {
         <button type="submit">Submit</button>
       </form>
       <h1>
-        {answer.map((fruit, index) => (
+        {/* {answer.map((fruit, index) => (
           <li key={index}>{fruit}</li>
-        ))}
+        ))} */}
       </h1>
     </div>
   );
