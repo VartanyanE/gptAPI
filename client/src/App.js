@@ -77,8 +77,11 @@ const App = () => {
         />
         <button type="submit">Submit</button>
       </form>
-      <h1>{formData.response}</h1>
-      <h1 className="post">{formData.data}</h1>
+      {formData.response ? (
+        <h1 className="post">{formData.response.bot}</h1>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
