@@ -21,7 +21,8 @@ app.get("/", async (req, res) => {
 app.post("/chatbot", async (req, res) => {
   try {
     const topic = "JavaScript";
-    const question = req.body.payload;
+    const question = req.body.question;
+    console.log(question);
     const message = [
       { role: "system", content: `You are a ${topic} developer.` },
       {
@@ -49,5 +50,5 @@ app.post("/chatbot", async (req, res) => {
 });
 
 app.listen(8000, () =>
-  console.log("AI server started on http://localhost:8000")
+  console.log("AI server started on http://localhost:8000"),
 );
