@@ -21,8 +21,8 @@ app.get("/", async (req, res) => {
 app.post("/chatbot", async (req, res) => {
   try {
     const topic = "JavaScript";
+    console.log(req.body.question);
     const question = req.body.question;
-    console.log(question);
     const message = [
       { role: "system", content: `You are a ${topic} developer.` },
       {
@@ -40,9 +40,7 @@ app.post("/chatbot", async (req, res) => {
       messages: message,
     });
 
-    res.status(200).send({
-      bot: response.data.choices[0].message.content,
-    });
+    res.status(200).send(response.data.choices[0].message.content);
   } catch (error) {
     console.error(error);
     res.status(500).send(error || "Something went wrong");
@@ -50,5 +48,5 @@ app.post("/chatbot", async (req, res) => {
 });
 
 app.listen(8000, () =>
-  console.log("AI server started on http://localhost:8000"),
+  console.log("AI server started on http://localhost:8000")
 );

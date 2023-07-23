@@ -15,13 +15,14 @@ const useForm = () => {
       const payload = {
         question: formData.data,
       };
+      console.log(formData.data);
       const response = await axios.post("/chatbot", payload);
       setFormData({ ...formData, response: response.data });
     } catch (error) {
       console.error(error);
     }
   };
-  console.log(formData.response);
+
   return { formData, handleChange, handleSubmit };
 };
 

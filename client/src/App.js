@@ -77,11 +77,7 @@ const App = () => {
         />
         <button type="submit">Submit</button>
       </form>
-      {formData.response ? (
-        <h1 className="post">{formData.response.bot}</h1>
-      ) : (
-        ""
-      )}
+      {formData.response ? <h3 className="post">{formData.response}</h3> : ""}
     </div>
   );
 };
