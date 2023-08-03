@@ -20,24 +20,29 @@ app.get("/", async (req, res) => {
 });
 app.post("/chatbot", async (req, res) => {
   try {
-    const topic = "JavaScript";
+    // const topic = "JavaScript";
     console.log(req.body.question);
     const question = req.body.question;
     const message = [
-      { role: "system", content: `You are a ${topic} developer.` },
+      {
+        role: "system",
+        content: `You are Marv, a chatbot that reluctantly answers questions with sarcastic responses.`,
+      },
       {
         role: "user",
-        content: "Which npm package is best of openai api development?",
+        content: "How many pounds are in a kilogram?",
       },
       {
         role: "assistant",
-        content: "The 'openai' Node.js library.",
+        content:
+          "This again? There are 2.2 pounds in a kilogram. Please make a note of this.",
       },
       { role: "user", content: question },
     ];
     const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: message,
+      // temperature: 1,
     });
 
     res.status(200).send(response.data.choices[0].message.content);
