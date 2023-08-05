@@ -13,6 +13,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("../client/build"));
+}
+
 app.get("/", async (req, res) => {
   res.status(200).send({
     message: "Hello from CodeX!",
