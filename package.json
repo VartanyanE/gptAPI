@@ -6,13 +6,13 @@
   "type": "module",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "start:prod": "node server.js",
-    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "start:prod": "cd server && node server.js",
+    "start:dev": "cd server && nodemon server.js",
     "client": "cd client && npm run start",
-   
+    "seed": "node seed/seedData.js",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build",
+    "heroku-postbuild": "cd server && npm run build",
     "stop": "taskkill -F -IM node.exe"
   },
   "keywords": [],
