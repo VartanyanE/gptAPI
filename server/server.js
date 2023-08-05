@@ -55,7 +55,5 @@ app.post("/chatbot", async (req, res) => {
     res.status(500).send(error || "Something went wrong");
   }
 });
-
-app.listen(8000, () =>
-  console.log("AI server started on http://localhost:8000"),
-);
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => console.log(`AI server started on ${PORT} `));
