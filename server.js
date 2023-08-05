@@ -40,7 +40,7 @@ app.post("/chatbot", async (req, res) => {
       { role: "user", content: question },
     ];
     const response = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
+      model: "gpt-3.5-turbo-0613",
       messages: message,
       // temperature: 1,
     });
@@ -53,5 +53,5 @@ app.post("/chatbot", async (req, res) => {
 });
 
 app.listen(8000, () =>
-  console.log("AI server started on http://localhost:8000")
+  console.log("AI server started on http://localhost:8000"),
 );
