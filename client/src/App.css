@@ -1,76 +1,229 @@
-/* Styles for the body element */
+* {
+  font-family: Arial, Helvetica, sans-serifß;
+}
+
+p {
+  display: inline;
+  font-size: 13px;
+  margin-bottom: 5px !important;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f1f1f1;
-  color: #333;
+  background-color: #8ab7e6;
 }
 
-/* Styles for the header section */
-header {
-  background-color: #ffcc00;
-  padding: 20px;
-}
-
-/* Styles for the logo element */
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-}
-
-/* Styles for the navigation menu */
-nav {
-  margin-top: 10px;
-}
-
-/* Styles for the individual navigation links */
-nav a {
-  color: #333;
-  text-decoration: none;
-  margin-right: 10px;
-}
-
-/* Styles for the main content section */
-main {
-  padding: 20px;
-}
-
-/* Styles for the blog post container */
-.post {
-  background-color: #f05656;
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
   border-radius: 5px;
-  padding: 20px;
-  margin-bottom: 20px;
-}
-
-/* Styles for the title of the blog post */
-.post-title {
-  font-size: 20px;
-  font-weight: bold;
-  color: #333;
-}
-
-/* Styles for the content of the blog post */
-.post-content {
-  margin-top: 10px;
-  line-height: 1.5;
-}
-
-/* Styles for the sidebar section */
-sidebar {
+  border-color: #ccc;
   background-color: #fff;
-  padding: 20px;
+  height: 1000px;
+  margin-top: 60px !important;
+  margin: 30px;
+  padding-left: 30px;
+  padding-top: 40px;
+  padding-right: 30px;
+  display: grid;
+  grid-gap: 3px;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 80px 80px 150px 60px 60px 300px 60px 300px;
+  grid-template-areas:
+    "t t t . . . b b b b b b"
+    "n n n n n n . . . . . ."
+    "o o o o o o . . . . . ."
+    "a a . . . . . . . . . ."
+    "f f f f f f . d . . . ."
+    "fn fn fn fn fn fn . . . . . . "
+    "st st st st st st st st st st st st"
+    "sn sn sn sn sn sn sn sn sn sn sn sn";
+
+  font-family: Arial !important;
 }
 
-/* Styles for the individual widgets in the sidebar */
-.widget {
-  margin-bottom: 20px;
+
+/* Style for the input fields */
+.input-field {
+  
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 16px;
+  color: #555;
+  transition: border-color 0.3s ease-in-out;
+  grid-area: n;
+}
+.post {
+grid-area:o ;
 }
 
-/* Styles for the footer section */
-footer {
-  background-color: #333;
+.input-field:focus {
+  border-color: #66b3ff;
+}
+
+/* Style for the submit button */
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
   color: #fff;
-  padding: 20px;
-  text-align: center;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  grid-area: o;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+
+/*  Media Queries */
+
+@media (max-width: 980px) {
+  .card {
+    grid-template-areas:
+      "t t t t t t t t t t t t"
+      "b b b b b b b b b b b b"
+      "n n n n n n n n n n n n"
+      "o o o o o o o o o o o o"
+      "a a . . . . . . . . . ."
+      "f f f f f f f f f f f f"
+      "fn fn fn fn fn fn fn fn fn fn fn fn "
+      "d d . . . . . . . . . .";
+
+    grid-template-rows: 80px 80px 90px 150px 60px 60px 160px 60px;
+  }
+
+  @media (max-width: 600px) {
+    .card {
+      grid-template-areas:
+        "t t t t t t t t t t t t"
+        "b b b b b b b b b b b b"
+        "n n n n n n n n n n n n"
+        "o o o o o o o o o o o o"
+        "a a . . . . . . . . . ."
+        "f f f f f f f f f f f f"
+        "fn fn fn fn fn fn fn fn fn fn fn fn "
+        "d d . . . . . . . . . .";
+      grid-template-columns: repeat(12, 1fr);
+      grid-gap: 1px;
+    }
+    .notepad-title {
+      grid-area: t;
+      width: 100% !important;
+    }
+
+    .title-btns {
+      grid-area: b;
+      display: inline;
+      align-self: center;
+      justify-self: center;
+    }
+
+    .stats-btn {
+      background-color: #fff;
+      border-radius: 5px;
+      border-color: #ccc;
+      font-weight: bolder;
+      width: 90px;
+    }
+
+    .save-btn {
+      background-color: #39acdc;
+      border-radius: 5px;
+      border-color: #ccc;
+      font-weight: bolder;
+      color: #fff;
+      margin-right: 7px;
+      margin-left: 7px;
+      width: 80px;
+    }
+
+    .del-btn {
+      background-color: #ec3646;
+      border-radius: 5px;
+      border-color: #ccc;
+      font-weight: bolder;
+      color: #fff;
+      width: 80px;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .card {
+      grid-template-areas:
+        "t t t t t t t t t t t t"
+        "b b b b b b b b b b b b"
+        "n n n n n n n n n n n n"
+        "o o o o o o o o o o o o"
+        "a a . . . . . . . . . ."
+        "f f f f f f f f f f f f"
+        "fn fn fn fn fn fn fn fn fn fn fn fn "
+        "d d . . . . . . . . . .";
+
+      grid-template-rows: 80px 90px 90px 150px 60px 60px 160px 60px;
+    }
+    .title-btns {
+      grid-area: b;
+      display: block;
+      justify-self: start !important;
+      width: 100%;
+    }
+
+    .stats-btn {
+      background-color: #fff;
+      border-radius: 5px;
+      border-color: #ccc;
+      font-weight: bolder;
+      width: 90px !important;
+    }
+
+    .save-btn {
+      background-color: #39acdc;
+      border-radius: 5px;
+      border-color: #ccc;
+      font-weight: bolder;
+      color: #fff;
+      margin: 0 !important;
+      width: 47px !important;
+    }
+
+    .del-btn {
+      background-color: #ec3646;
+      border-radius: 5px;
+      border-color: #ccc;
+      font-weight: bolder;
+      color: #fff;
+      width: 50px !important;
+    }
+  }
+
+  .notepad-title {
+    grid-area: t;
+    width: 100%;
+  }
+
+  .title-btns {
+    grid-area: b;
+    display: inline;
+    align-self: center;
+    justify-items: start;
+    width: 100%;
+  }
+
+  .note-title {
+    grid-area: n;
+    align-self: start !important;
+  }
+
+  .note {
+    grid-area: o;
+    width: 100%;
+    align-self: start !important;
+  }
 }

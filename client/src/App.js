@@ -6,15 +6,18 @@ const App = () => {
   const { formData, handleChange, handleSubmit } = useForm();
 
   return (
-    <div>
+    <div className="card">
       <form onSubmit={handleSubmit}>
         <input
+          className="input-field"
           type="text"
           name="data"
           value={formData.data}
           onChange={handleChange}
         />
-        <button type="submit">Submit</button>
+        <button className="submit-button" type="submit">
+          Submit
+        </button>
       </form>
       {formData.response ? <h3 className="post">{formData.response}</h3> : ""}
     </div>

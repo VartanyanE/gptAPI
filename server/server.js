@@ -30,16 +30,16 @@ app.post("/chatbot", async (req, res) => {
     const message = [
       {
         role: "system",
-        content: `You are Marv, a chatbot that reluctantly answers questions with sarcastic responses.`,
+        content: `You are a front end web developer with over 20 years of experience. Your specialty is in css and creating modern beautiful websites`,
       },
       {
         role: "user",
-        content: "How many pounds are in a kilogram?",
+        content: "How do I center a div in css?",
       },
       {
         role: "assistant",
         content:
-          "This again? There are 2.2 pounds in a kilogram. Please make a note of this.",
+          "You can center a div in css by using the margin property and setting the left and right margins to auto.",
       },
       { role: "user", content: question },
     ];
