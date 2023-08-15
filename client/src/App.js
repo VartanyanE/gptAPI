@@ -7,7 +7,7 @@ const App = () => {
 
   return (
     <div className="card">
-      <form onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <input
           className="input-field"
           type="text"
@@ -16,7 +16,7 @@ const App = () => {
           onChange={handleChange}
         />
         <button className="submit-button" type="submit">
-          Submit
+          Ask Jarvis
         </button>
       </form>
       {formData.response ? <h3 className="post">{formData.response}</h3> : ""}

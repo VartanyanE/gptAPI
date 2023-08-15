@@ -41,7 +41,9 @@ body {
   font-family: Arial !important;
 }
 
-
+.form{
+  grid-area: n;
+}
 /* Style for the input fields */
 .input-field {
   
@@ -52,8 +54,9 @@ body {
   background-color: #fff;
   font-size: 16px;
   color: #555;
+  width: 90%;
   transition: border-color 0.3s ease-in-out;
-  grid-area: n;
+  
 }
 .post {
 grid-area:o ;
@@ -65,21 +68,31 @@ grid-area:o ;
 
 /* Style for the submit button */
 .submit-button {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: #fff;
+  display: inline-block;
+  padding: 12px 20px;
   font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  background-color: #ff6b6b;
+  color: #fff;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-  grid-area: o;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .submit-button:hover {
-  background-color: #0056b3;
+  background-color: #ff4949;
 }
+
+.submit-button:active {
+  transform: scale(0.95);
+}
+
+/* Adding a shadow to the button for depth */
+.submit-button {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
 
 
 /*  Media Queries */
@@ -91,8 +104,8 @@ grid-area:o ;
       "b b b b b b b b b b b b"
       "n n n n n n n n n n n n"
       "o o o o o o o o o o o o"
-      "a a . . . . . . . . . ."
       "f f f f f f f f f f f f"
+      "a a . . . . . . . . . ."
       "fn fn fn fn fn fn fn fn fn fn fn fn "
       "d d . . . . . . . . . .";
 
