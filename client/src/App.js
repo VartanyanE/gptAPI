@@ -7,6 +7,9 @@ const App = () => {
 
   return (
     <div className="card">
+      <div className="image-container">
+        <img src="ai.png" alt="Example Image" />
+      </div>
       <form className="form" onSubmit={handleSubmit}>
         <input
           className="input-field"

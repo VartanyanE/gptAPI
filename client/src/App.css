@@ -18,7 +18,7 @@ body {
   border-radius: 5px;
   border-color: #ccc;
   background-color: #fff;
-  height: 1000px;
+  height: 2000px;
   margin-top: 60px !important;
   margin: 30px;
   padding-left: 30px;
@@ -29,16 +29,15 @@ body {
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 80px 80px 150px 60px 60px 300px 60px 300px;
   grid-template-areas:
-    "t t t . . . b b b b b b"
-    "n n n n n n . . . . . ."
-    "o o o o o o . . . . . ."
-    "a a . . . . . . . . . ."
-    "f f f f f f . d . . . ."
-    "fn fn fn fn fn fn . . . . . . "
-    "st st st st st st st st st st st st"
-    "sn sn sn sn sn sn sn sn sn sn sn sn";
+  "t t t t t t t t t t t t"
+  "b b b b b b b b b b b b"
+  "n n n n n n n n n n n n"
+  "o o o o o o o o o o o o"
+  "f f f f f f f f f f f f"
+  "a a . . . . . . . . . ."
+  "fn fn fn fn fn fn fn fn fn fn fn fn "
+  "d d . . . . . . . . . .";
 
-  font-family: Arial !important;
 }
 
 .form{
@@ -60,6 +59,15 @@ body {
 }
 .post {
 grid-area:o ;
+font-family: 'Roboto', sans-serif;
+font-weight: bold;
+font-size: 18px;
+color: #8ab7e6;
+text-transform: uppercase;
+letter-spacing: 2px;
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+animation: neon-glow 1.5s ease-in-out infinite alternate;
+
 }
 
 .input-field:focus {
@@ -92,7 +100,37 @@ grid-area:o ;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.image-container {
+ 
+  height: 100vh; /* Adjust as needed */
+  grid-area: t;
+}
 
+/* Style for the image */
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.futuristic-text {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: 36px;
+  color: #00ccff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  animation: neon-glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes neon-glow {
+  from {
+    text-shadow: 2px 2px 4px rgba(0, 0, 255, 0.2);
+  }
+  to {
+    text-shadow: 0px 0px 8px rgba(0, 204, 255, 0.8);
+  }
+}
 
 
 /*  Media Queries */
