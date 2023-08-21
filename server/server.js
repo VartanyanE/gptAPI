@@ -3,6 +3,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
 import express from "express";
+import sgMail from "@sendgrid/mail"; // Use ES6 import for SendGrid module
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -17,28 +18,50 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("../client/build"));
 }
 
-async function sendEmail(to, from, subject, text) {
-  const sgMail = require("@sendgrid/mail");
+// async function sendEmail(to, from, subject, text) {
+//   const sgMail = require("@sendgrid/mail");
+//   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+//   const sendGMsg = "";
+//   const msg = {
+//     to: to, // Change to your recipient
+//     from: from, // Change to your verified sender
+//     subject: subject,
+//     text: text, //body of the email
+//   };
+//   sgMail
+//     .send(msg)
+//     .then(() => {
+//       // console.log('Email sent')
+//       const sendGMsg = "Email Sent";
+//     })
+//     .catch((error) => {
+//       //console.error(error)
+//       const sendGMsg = "message not sent";
+//     });
+//   return sendGMsg;
+// }
+
+const sendEmail = async (to, from, subject, text) => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-  const sendGMsg = "";
+  let sendGMsg = "";
+
   const msg = {
-    to: to, // Change to your recipient
-    from: from, // Change to your verified sender
-    subject: subject,
-    text: text, //body of the email
+    to, // ES6 shorthand for 'to: to'
+    from, // ES6 shorthand for 'from: from'
+    subject,
+    text,
   };
-  sgMail
-    .send(msg)
-    .then(() => {
-      // console.log('Email sent')
-      const sendGMsg = "Email Sent";
-    })
-    .catch((error) => {
-      //console.error(error)
-      const sendGMsg = "message not sent";
-    });
+
+  try {
+    await sgMail.send(msg);
+    sendGMsg = "Email Sent";
+    console.log(sendGMsg);
+  } catch (error) {
+    sendGMsg = "Message not sent";
+  }
+
   return sendGMsg;
-}
+};
 
 app.get("/", async (req, res) => {
   res.status(200).send({
@@ -98,35 +121,37 @@ app.post("/chatbot", async (req, res) => {
     });
     const completionResponse = response.data.choices[0].message;
     // console.log(completionResponse);
+    if (completionResponse.content) {
+      res.status(200).send(response.data.choices[0].message.content);
+    } else if (!completionResponse.content) {
+      // console.log(completionResponse);
 
-    if (!completionResponse.content) {
-      console.log(completionResponse);
+      const functionCallName = completionResponse.function_call.name;
+      console.log("functionCallName: ", functionCallName);
+      if (functionCallName === "sendEmail") {
+        const completionArguments = JSON.parse(
+          completionResponse.function_call.arguments
+        );
+        const completion_text = await sendEmail(
+          completionArguments.to,
+          completionArguments.from,
+          completionArguments.subject,
+          completionArguments.text
+        );
 
-      // const functionCallName = completionResponse.function_call.name;
-      // console.log("functionCallName: ", functionCallName);
+        history.push([question, completion_text]);
+        const completion = await openai.createChatCompletion({
+          model: "gpt-3.5-turbo-0613",
+          messages: messages,
+        });
 
-      const completionArguments = JSON.parse(
-        completionResponse.function_call.arguments
-      );
-      const completion_text = await sendEmail(
-        completionArguments.to,
-        completionArguments.from,
-        completionArguments.subject,
-        completionArguments.text
-      );
-      history.push([question, completion_text]);
-      const completion = await openai.createChatCompletion({
-        model: "gpt-3.5-turbo-0613",
-        messages: messages,
-      });
-
-      // Extract the generated completion from the OpenAI API response.
-      const completionResponse = completion.data.choices[0].message.content;
-      //console.log(messages);
-
-      console.log(completionResponse);
+        // Extract the generated completion from the OpenAI API response.
+        // const completionResponse = completion.data.choices[0].message.content;
+        //console.log(messages);
+        res.status(200).send(completion.data.choices[0].message.content);
+      }
+      // console.log(completion.data.choices[0]);
     }
-    // res.status(200).send(response.data.choices[0].message.content);
   } catch (error) {
     console.error(error);
     res.status(500).send(error || "Something went wrong");

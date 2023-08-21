@@ -27,7 +27,7 @@ body {
   display: grid;
   grid-gap: 3px;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 80px 80px 150px 60px 60px 300px 60px 300px;
+  grid-template-rows: 80px 80px 60px 60px 60px 60px 60px 300px;
   grid-template-areas:
   "t t t t t t t t t t t t"
   "b b b b b b b b b b b b"
@@ -55,20 +55,29 @@ body {
   color: #555;
   width: 90%;
   transition: border-color 0.3s ease-in-out;
+  height: 60px;
   
 }
-.post {
-grid-area:o ;
-font-family: 'Roboto', sans-serif;
-font-weight: bold;
-font-size: 18px;
-color: #8ab7e6;
-text-transform: uppercase;
-letter-spacing: 2px;
-text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-animation: neon-glow 1.5s ease-in-out infinite alternate;
 
-}
+
+.post {
+  grid-area:o;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  color: #8ab7e6;
+  margin-top:70px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  animation: neon-glow 1.5s ease-in-out infinite alternate;
+  opacity: 0; /* Hide the text initially */
+    animation: appear 0.5s ease-in-out forwards; /* Apply the animation */
+    animation-delay: 0.5s; /* Add a delay to stagger the animations */
+  
+  }
+
+  
 
 .input-field:focus {
   border-color: #66b3ff;
@@ -112,15 +121,16 @@ img {
   max-height: 100%;
 }
 
-.futuristic-text {
-  font-family: 'Roboto', sans-serif;
-  font-weight: bold;
-  font-size: 36px;
-  color: #00ccff;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  animation: neon-glow 1.5s ease-in-out infinite alternate;
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes neon-glow {
@@ -147,7 +157,7 @@ img {
       "fn fn fn fn fn fn fn fn fn fn fn fn "
       "d d . . . . . . . . . .";
 
-    grid-template-rows: 80px 80px 90px 150px 60px 60px 160px 60px;
+    grid-template-rows: 80px 80px 90px 60px 60px 60px 160px 60px;
   }
 
   @media (max-width: 600px) {
