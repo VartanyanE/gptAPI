@@ -22,7 +22,11 @@ const App = () => {
           Ask Jarvis
         </button>
       </form>
-      {formData.response ? <h3 className="post">{formData.response}</h3> : ""}
+      {formData.response ? (
+        <h3 className="post">{formData.response}</h3>
+      ) : (
+        <h3 className="post">GO AHEAD AND ASK ME SOMETHING.</h3>
+      )}
     </div>
   );
 };
