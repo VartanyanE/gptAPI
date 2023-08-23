@@ -4,6 +4,7 @@ dotenv.config();
 import cors from "cors";
 import express from "express";
 import sgMail from "@sendgrid/mail"; // Use ES6 import for SendGrid module
+import axios from "axios";
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -17,29 +18,6 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("../client/build"));
 }
-
-// async function sendEmail(to, from, subject, text) {
-//   const sgMail = require("@sendgrid/mail");
-//   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-//   const sendGMsg = "";
-//   const msg = {
-//     to: to, // Change to your recipient
-//     from: from, // Change to your verified sender
-//     subject: subject,
-//     text: text, //body of the email
-//   };
-//   sgMail
-//     .send(msg)
-//     .then(() => {
-//       // console.log('Email sent')
-//       const sendGMsg = "Email Sent";
-//     })
-//     .catch((error) => {
-//       //console.error(error)
-//       const sendGMsg = "message not sent";
-//     });
-//   return sendGMsg;
-// }
 
 const sendEmail = async (to, from, subject, text) => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -63,6 +41,36 @@ const sendEmail = async (to, from, subject, text) => {
   return sendGMsg;
 };
 
+async function lookupWeather(location) {
+  const options = {
+    method: "GET",
+    url: "https://weatherapi-com.p.rapidapi.com/forecast.json",
+    params: {
+      q: location,
+      days: "3",
+    },
+    headers: {
+      "X-RapidAPI-Key": process.env.X_RAPIDAPI_KEY,
+      "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com",
+    },
+  };
+
+  try {
+    const response = await axios.request(options);
+    let weather = response.data;
+
+    const weatherForecast = `Location: ${weather.location.name} \
+  Current Temperature: ${weather.current.temp_f} \
+  Condition: ${weather.current.condition.text}. \
+  Low Today: ${weather.forecast.forecastday[0].day.mintemp_f} \
+  High Today: ${weather.forecast.forecastday[0].day.maxtemp_f}`;
+    return weatherForecast;
+  } catch (error) {
+    console.error(error);
+    return "No forecast found";
+  }
+}
+
 app.get("/", async (req, res) => {
   res.status(200).send({
     message: "Hello from CodeX!",
@@ -72,7 +80,6 @@ app.post("/chatbot", async (req, res) => {
   try {
     const history = [];
 
-    // const topic = "JavaScript";
     console.log(req.body.question);
     const question = req.body.question;
     const senderEmail = process.env.SENDER_EMAIL;
@@ -115,17 +122,30 @@ app.post("/chatbot", async (req, res) => {
             required: ["to", "from", "subject", "text"], // specify that the location parameter is required
           },
         },
+        {
+          name: "lookupWeather",
+          description: "get the weather forecast in a given location",
+          parameters: {
+            type: "object", // specify that the parameter is an object
+            properties: {
+              location: {
+                type: "string", // specify the parameter type as a string
+                description:
+                  "The location, e.g. Beijing, China. But it should be written in a city, state, country",
+              },
+            },
+            required: ["location"], // specify that the location parameter is required
+          },
+        },
       ],
       function_call: "auto",
       // temperature: 1,
     });
     const completionResponse = response.data.choices[0].message;
-    // console.log(completionResponse);
+
     if (completionResponse.content) {
       res.status(200).send(response.data.choices[0].message.content);
     } else if (!completionResponse.content) {
-      // console.log(completionResponse);
-
       const functionCallName = completionResponse.function_call.name;
       console.log("functionCallName: ", functionCallName);
       if (functionCallName === "sendEmail") {
@@ -140,17 +160,30 @@ app.post("/chatbot", async (req, res) => {
         );
 
         history.push([question, completion_text]);
-        const completion = await openai.createChatCompletion({
-          model: "gpt-3.5-turbo-0613",
-          messages: messages,
-        });
 
         // Extract the generated completion from the OpenAI API response.
         // const completionResponse = completion.data.choices[0].message.content;
         //console.log(messages);
-        res.status(200).send(completion.data.choices[0].message.content);
+      } else if (functionCallName === "lookupWeather") {
+        const completionArguments = JSON.parse(
+          completionResponse.function_call.arguments
+        );
+
+        const completion_text = await lookupWeather(
+          completionArguments.location
+        );
+        history.push([question, completion_text]);
+        messages.push({
+          role: "user",
+          content: "Summarize the following input." + completion_text,
+        });
       }
-      // console.log(completion.data.choices[0]);
+      const completion = await openai.createChatCompletion({
+        model: "gpt-3.5-turbo-0613",
+        messages: messages,
+      });
+
+      res.status(200).send(completion.data.choices[0].message.content);
     }
   } catch (error) {
     console.error(error);

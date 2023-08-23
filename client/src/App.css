@@ -18,7 +18,7 @@ body {
   border-radius: 5px;
   border-color: #ccc;
   background-color: #fff;
-  height: 2000px;
+  height: 100vh;
   margin-top: 60px !important;
   margin: 30px;
   padding-left: 30px;
@@ -55,7 +55,7 @@ body {
   color: #555;
   width: 90%;
   transition: border-color 0.3s ease-in-out;
-  height: 60px;
+  /* height: 60px; */
   
 }
 
