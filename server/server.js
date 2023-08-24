@@ -71,6 +71,24 @@ async function lookupWeather(location) {
   }
 }
 
+async function lookupCar(vin) {
+  const options = {
+    method: "GET",
+    url: `https://car-api2.p.rapidapi.com/api/vin/${vin}`,
+    headers: {
+      "X-RapidAPI-Key": process.env.X_RAPIDAPI_KEY,
+      "X-RapidAPI-Host": "car-api2.p.rapidapi.com",
+    },
+  };
+
+  try {
+    const response = await axios.request(options);
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 app.get("/", async (req, res) => {
   res.status(200).send({
     message: "Hello from CodeX!",
@@ -123,6 +141,20 @@ app.post("/chatbot", async (req, res) => {
           },
         },
         {
+          name: "lookupCar",
+          description: "get car information from VIN",
+          parameters: {
+            type: "object", // specify that the parameter is an object
+            properties: {
+              vin: {
+                type: "string", // specify the parameter type as a string
+                description: "The cars VIN number.",
+              },
+            },
+            required: ["vin"], // specify that the location parameter is required
+          },
+        },
+        {
           name: "lookupWeather",
           description: "get the weather forecast in a given location",
           parameters: {
@@ -150,13 +182,13 @@ app.post("/chatbot", async (req, res) => {
       console.log("functionCallName: ", functionCallName);
       if (functionCallName === "sendEmail") {
         const completionArguments = JSON.parse(
-          completionResponse.function_call.arguments
+          completionResponse.function_call.arguments,
         );
         const completion_text = await sendEmail(
           completionArguments.to,
           completionArguments.from,
           completionArguments.subject,
-          completionArguments.text
+          completionArguments.text,
         );
 
         history.push([question, completion_text]);
@@ -166,17 +198,24 @@ app.post("/chatbot", async (req, res) => {
         //console.log(messages);
       } else if (functionCallName === "lookupWeather") {
         const completionArguments = JSON.parse(
-          completionResponse.function_call.arguments
+          completionResponse.function_call.arguments,
         );
 
         const completion_text = await lookupWeather(
-          completionArguments.location
+          completionArguments.location,
         );
         history.push([question, completion_text]);
         messages.push({
           role: "user",
           content: "Summarize the following input." + completion_text,
         });
+      } else if (functionCallName === "lookupCarr") {
+        const completionArguments = JSON.parse(
+          completionResponse.function_call.arguments,
+        );
+
+        const completion_text = await lookupCar(completionArguments.vin);
+        history.push([question, completion_text]);
       }
       const completion = await openai.createChatCompletion({
         model: "gpt-3.5-turbo-0613",
