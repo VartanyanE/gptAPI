@@ -22,7 +22,13 @@ const App = () => {
           Ask Jarvis
         </button>
       </form>
-      {formData.response ? <h3 className="post">{formData.response}</h3> : ""}
+      {formData.response ? (
+        <h3 className="post">
+          <div className="scrollable-text">{formData.response}</div>{" "}
+        </h3>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

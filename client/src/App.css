@@ -21,9 +21,9 @@ body {
   height: 100vh;
   margin-top: 60px !important;
   margin: 30px;
-  padding-left: 30px;
-  padding-top: 40px;
-  padding-right: 30px;
+  padding-left: 20px;
+  padding-top: 30px;
+  padding-right: 20px;
   display: grid;
   grid-gap: 3px;
   grid-template-columns: repeat(12, 1fr);
@@ -65,9 +65,10 @@ body {
   grid-area:o;
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 14px;
   color: #8ab7e6;
-  margin-top:70px;
+  margin-top:50px;
+  height: 80vh;
   text-transform: uppercase;
   letter-spacing: 2px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -75,10 +76,16 @@ body {
   opacity: 0; /* Hide the text initially */
     animation: appear 0.5s ease-in-out forwards; /* Apply the animation */
     animation-delay: 0.5s; /* Add a delay to stagger the animations */
-  
+    overflow: hidden;
   }
 
-  
+  .scrollable-text {
+    max-height: 50vh; /* Set the maximum height of the scrollable text */
+    overflow-y: auto; /* Enable vertical scrolling when the content exceeds max-height */
+    padding: 16px; /* Optional padding for better readability */
+    border: 1px solid #ccc; /* Optional border for styling */
+    background-color: #f0f8ff; /* Optional background color */
+  }
 
 .input-field:focus {
   border-color: #66b3ff;
