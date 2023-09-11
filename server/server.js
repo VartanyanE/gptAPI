@@ -107,7 +107,7 @@ app.post("/chatbot", async (req, res) => {
       messages.push({ role: "user", content: input_text });
       messages.push({ role: "assistant", content: completion_text });
     }
-
+    messages.push({ role: "system", content: "Your name is Jarvis GPT" });
     messages.push({ role: "user", content: question });
 
     const response = await openai.createChatCompletion({
