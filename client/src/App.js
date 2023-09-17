@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div className="card">
       <div className="image-container">
-        <img src="ai.png" alt="Example Image" />
+        <img src="teacher.jpg" alt="Example Image" />
       </div>
       <form className="form" onSubmit={handleSubmit}>
         <input
@@ -19,7 +19,7 @@ const App = () => {
           onChange={handleChange}
         />
         <button className="submit-button" type="submit">
-          Ask Jarvis
+          Ask The Teacher
         </button>
       </form>
       {formData.response ? (
