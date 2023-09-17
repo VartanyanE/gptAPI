@@ -107,7 +107,11 @@ app.post("/chatbot", async (req, res) => {
       messages.push({ role: "user", content: input_text });
       messages.push({ role: "assistant", content: completion_text });
     }
-    messages.push({ role: "system", content: "Your name is Jarvis GPT" });
+    messages.push({
+      role: "system",
+      content:
+        "You have been an elemnatary school teacher for 5 years.  Answer every question like you are talking to a 4th grade student. Try to include as much information as possible.",
+    });
     messages.push({ role: "user", content: question });
 
     const response = await openai.createChatCompletion({

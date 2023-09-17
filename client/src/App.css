@@ -83,7 +83,7 @@ body {
     max-height: 50vh; /* Set the maximum height of the scrollable text */
     overflow-y: auto; /* Enable vertical scrolling when the content exceeds max-height */
     padding: 16px; /* Optional padding for better readability */
-    border: 1px solid #ccc; /* Optional border for styling */
+   
     background-color: #f0f8ff; /* Optional background color */
   }
 
@@ -98,7 +98,7 @@ body {
   font-size: 18px;
   border: none;
   border-radius: 30px;
-  background-color: #808080;
+  background-color: #ff4949;
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
@@ -167,6 +167,23 @@ img {
 
 /*  Media Queries */
 
+@media (max-width: 1200px) {
+  .card {
+    grid-template-areas:
+      "t t t t t t t t t t t t"
+      "b b b b b b b b b b b b"
+      "n n n n n n n n n n n n"
+      "o o o o o o o o o o o o"
+      "f f f f f f f f f f f f"
+      "a a . . . . . . . . . ."
+      "fn fn fn fn fn fn fn fn fn fn fn fn "
+      "d d . . . . . . . . . .";
+
+    grid-template-rows: 80px 80px 90px 60px 60px 60px 160px 60px;
+  }
+}
+
+
 @media (max-width: 980px) {
   .card {
     grid-template-areas:
@@ -181,6 +198,7 @@ img {
 
     grid-template-rows: 80px 80px 90px 60px 60px 60px 160px 60px;
   }
+}
 
   @media (max-width: 600px) {
     .card {
@@ -195,45 +213,6 @@ img {
         "d d . . . . . . . . . .";
       grid-template-columns: repeat(12, 1fr);
       grid-gap: 1px;
-    }
-    .notepad-title {
-      grid-area: t;
-      width: 100% !important;
-    }
-
-    .title-btns {
-      grid-area: b;
-      display: inline;
-      align-self: center;
-      justify-self: center;
-    }
-
-    .stats-btn {
-      background-color: #fff;
-      border-radius: 5px;
-      border-color: #ccc;
-      font-weight: bolder;
-      width: 90px;
-    }
-
-    .save-btn {
-      background-color: #39acdc;
-      border-radius: 5px;
-      border-color: #ccc;
-      font-weight: bolder;
-      color: #fff;
-      margin-right: 7px;
-      margin-left: 7px;
-      width: 80px;
-    }
-
-    .del-btn {
-      background-color: #ec3646;
-      border-radius: 5px;
-      border-color: #ccc;
-      font-weight: bolder;
-      color: #fff;
-      width: 80px;
     }
   }
 
@@ -251,62 +230,5 @@ img {
 
       grid-template-rows: 80px 90px 90px 150px 60px 60px 160px 60px;
     }
-    .title-btns {
-      grid-area: b;
-      display: block;
-      justify-self: start !important;
-      width: 100%;
-    }
-
-    .stats-btn {
-      background-color: #fff;
-      border-radius: 5px;
-      border-color: #ccc;
-      font-weight: bolder;
-      width: 90px !important;
-    }
-
-    .save-btn {
-      background-color: #39acdc;
-      border-radius: 5px;
-      border-color: #ccc;
-      font-weight: bolder;
-      color: #fff;
-      margin: 0 !important;
-      width: 47px !important;
-    }
-
-    .del-btn {
-      background-color: #ec3646;
-      border-radius: 5px;
-      border-color: #ccc;
-      font-weight: bolder;
-      color: #fff;
-      width: 50px !important;
-    }
   }
-
-  .notepad-title {
-    grid-area: t;
-    width: 100%;
-  }
-
-  .title-btns {
-    grid-area: b;
-    display: inline;
-    align-self: center;
-    justify-items: start;
-    width: 100%;
-  }
-
-  .note-title {
-    grid-area: n;
-    align-self: start !important;
-  }
-
-  .note {
-    grid-area: o;
-    width: 100%;
-    align-self: start !important;
-  }
-}
+    
