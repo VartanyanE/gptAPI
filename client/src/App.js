@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div className="card">
       <div className="image-container">
-        <img src="teacher.jpg" alt="Example Image" />
+        <img src="teacher.png" alt="Example Image" />
       </div>
       <form className="form" onSubmit={handleSubmit}>
         <input
