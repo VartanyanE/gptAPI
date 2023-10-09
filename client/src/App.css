@@ -168,6 +168,35 @@ img {
   }
 }
 
+.select-container {
+  text-align: center;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.custom-select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  background-color: #fff;
+}
+
+.custom-select:hover {
+  border-color: #3498DB;
+}
+
+.custom-select:focus {
+  border-color: #3498DB;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
 
 /*  Media Queries */
 

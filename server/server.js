@@ -100,6 +100,7 @@ app.post("/chatbot", async (req, res) => {
 
     console.log(req.body.question);
     const question = req.body.question;
+    const message = req.body.message;
     const senderEmail = process.env.SENDER_EMAIL;
 
     const messages = [];
@@ -110,7 +111,7 @@ app.post("/chatbot", async (req, res) => {
     messages.push({
       role: "system",
       content:
-        "You have been an elemnatary school teacher for 5 years.  Answer every question like you are talking to a 4th grade student. Try to include as much information as possible.",
+        "You have been an elementary school teacher for 5 years.  Answer every question like you are talking to a 4th grade student. Try to include as much information as possible.",
     });
     messages.push({ role: "user", content: question });
 

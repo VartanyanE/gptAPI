@@ -1,15 +1,17 @@
 import React from "react";
-import useForm from "./useForm";
+import UseForm from "./useForm";
+import UseSelect from "./useSelect";
 import "./App.css";
 
 const App = () => {
-  const { formData, handleChange, handleSubmit } = useForm();
+  const { formData, handleChange, handleSubmit } = UseForm();
 
   return (
     <div className="card">
       <div className="image-container">
         <img src="teacher.png" alt="Example Image" />
       </div>
+
       <form className="form" onSubmit={handleSubmit}>
         <input
           className="input-field"
@@ -22,6 +24,7 @@ const App = () => {
           Ask The Teacher
         </button>
       </form>
+      <UseSelect />
       {formData.response ? (
         <h3 className="post">
           <div className="scrollable-text">{formData.response}</div>{" "}
