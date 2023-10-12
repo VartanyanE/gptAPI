@@ -41,7 +41,7 @@ body {
 }
 
 .form{
-  grid-area: n;
+  grid-area: o;
 }
 /* Style for the input fields */
 .input-field {
@@ -63,7 +63,7 @@ body {
 
 
 .post {
-  grid-area:o;
+  grid-area:f;
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
   font-size: 20px;
@@ -96,6 +96,7 @@ body {
 /* Style for the submit button */
 .submit-button {
   display: inline-block;
+  grid-area: f;
   padding: 12px 20px;
   font-size: 18px;
   border: none;
@@ -170,11 +171,10 @@ img {
 
 .select-container {
   text-align: center;
-  background-color: #f0f0f0;
-  padding: 20px;
-  border-radius: 10px;
+  
+  
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  max-width: 300px;
+  width: 300px;
   margin: 0 auto;
 }
 
@@ -197,6 +197,10 @@ img {
   box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
 }
 
+.select{
+  grid-area: n;
+}
+
 
 /*  Media Queries */
 
@@ -213,7 +217,7 @@ img {
       "fn fn fn fn fn fn fn fn fn fn fn fn "
       "d d . . . . . . . . . .";
 
-    grid-template-rows:400px 80px 90px 60px 60px 60px 160px 60px;
+    grid-template-rows:300px 80px 90px 60px 60px 60px 160px 60px;
   }
   .image-container {
  
@@ -283,7 +287,8 @@ img {
         "fn fn fn fn fn fn fn fn fn fn fn fn "
         "d d . . . . . . . . . .";
 
-      grid-template-rows: 80px 90px 90px 150px 60px 60px 160px 60px;
+      grid-template-rows: 80px 90px 90px 60px 60px ;
     }
+    
   }
     

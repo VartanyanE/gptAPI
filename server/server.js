@@ -89,18 +89,25 @@ async function lookupCar(vin) {
   }
 }
 
+let myMessage = null;
+
 app.get("/", async (req, res) => {
   res.status(200).send({
     message: "Hello from CodeX!",
   });
 });
+
+app.post("/message", async (req, res) => {
+  myMessage = req.body.message.value;
+  console.log(myMessage);
+});
+
 app.post("/chatbot", async (req, res) => {
   try {
     const history = [];
 
     console.log(req.body.question);
     const question = req.body.question;
-    const message = req.body.message;
     const senderEmail = process.env.SENDER_EMAIL;
 
     const messages = [];
@@ -110,124 +117,127 @@ app.post("/chatbot", async (req, res) => {
     }
     messages.push({
       role: "system",
-      content:
-        "You have been an elementary school teacher for 5 years.  Answer every question like you are talking to a 4th grade student. Try to include as much information as possible.",
+      content: myMessage,
     });
-    messages.push({ role: "user", content: question });
-
-    const response = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo-0613",
-      messages: messages,
-      functions: [
-        {
-          name: "sendEmail",
-          description: "send an email to specified address",
-          parameters: {
-            type: "object", // specify that the parameter is an object
-            properties: {
-              to: {
-                type: "string", // specify the parameter type as a string
-                description: "The recipients email address.",
-              },
-              from: {
-                type: "string", // specify the parameter type as a string
-                description: `The senders email address, default to ${senderEmail}`,
-              },
-              subject: {
-                type: "string", // specify the parameter type as a string
-                description: "The subject of the email.",
-              },
-              text: {
-                type: "string", // specify the parameter type as a string
-                description: "The text or body of the email message.",
-              },
-            },
-            required: ["to", "from", "subject", "text"], // specify that the location parameter is required
-          },
-        },
-        {
-          name: "lookupCar",
-          description: "get car information from VIN",
-          parameters: {
-            type: "object", // specify that the parameter is an object
-            properties: {
-              vin: {
-                type: "string", // specify the parameter type as a string
-                description: "The cars VIN number.",
-              },
-            },
-            required: ["vin"], // specify that the location parameter is required
-          },
-        },
-        {
-          name: "lookupWeather",
-          description: "get the weather forecast in a given location",
-          parameters: {
-            type: "object", // specify that the parameter is an object
-            properties: {
-              location: {
-                type: "string", // specify the parameter type as a string
-                description:
-                  "The location, e.g. Beijing, China. But it should be written in a city, state, country",
-              },
-            },
-            required: ["location"], // specify that the location parameter is required
-          },
-        },
-      ],
-      function_call: "auto",
-      // temperature: 1,
+    messages.push({
+      role: "user",
+      content: question,
     });
-    const completionResponse = response.data.choices[0].message;
-
-    if (completionResponse.content) {
-      res.status(200).send(response.data.choices[0].message.content);
-    } else if (!completionResponse.content) {
-      const functionCallName = completionResponse.function_call.name;
-      console.log("functionCallName: ", functionCallName);
-      if (functionCallName === "sendEmail") {
-        const completionArguments = JSON.parse(
-          completionResponse.function_call.arguments,
-        );
-        const completion_text = await sendEmail(
-          completionArguments.to,
-          completionArguments.from,
-          completionArguments.subject,
-          completionArguments.text,
-        );
-
-        history.push([question, completion_text]);
-
-        // Extract the generated completion from the OpenAI API response.
-        // const completionResponse = completion.data.choices[0].message.content;
-        //console.log(messages);
-      } else if (functionCallName === "lookupWeather") {
-        const completionArguments = JSON.parse(
-          completionResponse.function_call.arguments,
-        );
-
-        const completion_text = await lookupWeather(
-          completionArguments.location,
-        );
-        history.push([question, completion_text]);
-        messages.push({
-          role: "user",
-          content: "Summarize the following input." + completion_text,
-        });
-      } else if (functionCallName === "lookupCarr") {
-        const completionArguments = JSON.parse(
-          completionResponse.function_call.arguments,
-        );
-
-        const completion_text = await lookupCar(completionArguments.vin);
-        history.push([question, completion_text]);
-      }
-      const completion = await openai.createChatCompletion({
+    {
+      const response = await openai.createChatCompletion({
         model: "gpt-3.5-turbo-0613",
         messages: messages,
+        functions: [
+          {
+            name: "sendEmail",
+            description: "send an email to specified address",
+            parameters: {
+              type: "object", // specify that the parameter is an object
+              properties: {
+                to: {
+                  type: "string", // specify the parameter type as a string
+                  description: "The recipients email address.",
+                },
+                from: {
+                  type: "string", // specify the parameter type as a string
+                  description: `The senders email address, default to ${senderEmail}`,
+                },
+                subject: {
+                  type: "string", // specify the parameter type as a string
+                  description: "The subject of the email.",
+                },
+                text: {
+                  type: "string", // specify the parameter type as a string
+                  description: "The text or body of the email message.",
+                },
+              },
+              required: ["to", "from", "subject", "text"], // specify that the location parameter is required
+            },
+          },
+          {
+            name: "lookupCar",
+            description: "get car information from VIN",
+            parameters: {
+              type: "object", // specify that the parameter is an object
+              properties: {
+                vin: {
+                  type: "string", // specify the parameter type as a string
+                  description: "The cars VIN number.",
+                },
+              },
+              required: ["vin"], // specify that the location parameter is required
+            },
+          },
+          {
+            name: "lookupWeather",
+            description: "get the weather forecast in a given location",
+            parameters: {
+              type: "object", // specify that the parameter is an object
+              properties: {
+                location: {
+                  type: "string", // specify the parameter type as a string
+                  description:
+                    "The location, e.g. Beijing, China. But it should be written in a city, state, country",
+                },
+              },
+              required: ["location"], // specify that the location parameter is required
+            },
+          },
+        ],
+        function_call: "auto",
+        // temperature: 1,
       });
+      const completionResponse = response.data.choices[0].message;
 
-      res.status(200).send(completion.data.choices[0].message.content);
+      if (completionResponse.content) {
+        res.status(200).send(response.data.choices[0].message.content);
+      } else if (!completionResponse.content) {
+        const functionCallName = completionResponse.function_call.name;
+        console.log("functionCallName: ", functionCallName);
+        if (functionCallName === "sendEmail") {
+          const completionArguments = JSON.parse(
+            completionResponse.function_call.arguments
+          );
+          const completion_text = await sendEmail(
+            completionArguments.to,
+            completionArguments.from,
+            completionArguments.subject,
+            completionArguments.text
+          );
+
+          history.push([question, completion_text]);
+
+          // Extract the generated completion from the OpenAI API response.
+          // const completionResponse = completion.data.choices[0].message.content;
+          //console.log(messages);
+        } else if (functionCallName === "lookupWeather") {
+          const completionArguments = JSON.parse(
+            completionResponse.function_call.arguments
+          );
+
+          const completion_text = await lookupWeather(
+            completionArguments.location
+          );
+          history.push([question, completion_text]);
+          messages.push({
+            role: "user",
+            content: "Summarize the following input." + completion_text,
+          });
+        } else if (functionCallName === "lookupCarr") {
+          const completionArguments = JSON.parse(
+            completionResponse.function_call.arguments
+          );
+
+          const completion_text = await lookupCar(completionArguments.vin);
+          history.push([question, completion_text]);
+        }
+        const completion = await openai.createChatCompletion({
+          model: "gpt-3.5-turbo-0613",
+          messages: messages,
+        });
+
+        res.status(200).send(completion.data.choices[0].message.content);
+      }
     }
   } catch (error) {
     console.error(error);
