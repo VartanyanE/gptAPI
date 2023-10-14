@@ -90,6 +90,8 @@ async function lookupCar(vin) {
 }
 
 let myMessage = null;
+let myAssistant = null;
+let userMessage = null;
 
 app.get("/", async (req, res) => {
   res.status(200).send({
@@ -99,6 +101,8 @@ app.get("/", async (req, res) => {
 
 app.post("/message", async (req, res) => {
   myMessage = req.body.message.value;
+  myAssistant = req.body.message.assistant;
+  userMessage = req.body.message.userMessage;
   console.log(myMessage);
 });
 
@@ -108,6 +112,7 @@ app.post("/chatbot", async (req, res) => {
 
     console.log(req.body.question);
     const question = req.body.question;
+
     const senderEmail = process.env.SENDER_EMAIL;
 
     const messages = [];
@@ -119,6 +124,15 @@ app.post("/chatbot", async (req, res) => {
       role: "system",
       content: myMessage,
     });
+    messages.push({
+      role: "assistant",
+      content: myAssistant,
+    });
+    messages.push({
+      role: "user",
+      content: userMessage,
+    });
+
     messages.push({
       role: "user",
       content: question,
@@ -196,13 +210,13 @@ app.post("/chatbot", async (req, res) => {
         console.log("functionCallName: ", functionCallName);
         if (functionCallName === "sendEmail") {
           const completionArguments = JSON.parse(
-            completionResponse.function_call.arguments
+            completionResponse.function_call.arguments,
           );
           const completion_text = await sendEmail(
             completionArguments.to,
             completionArguments.from,
             completionArguments.subject,
-            completionArguments.text
+            completionArguments.text,
           );
 
           history.push([question, completion_text]);
@@ -212,11 +226,11 @@ app.post("/chatbot", async (req, res) => {
           //console.log(messages);
         } else if (functionCallName === "lookupWeather") {
           const completionArguments = JSON.parse(
-            completionResponse.function_call.arguments
+            completionResponse.function_call.arguments,
           );
 
           const completion_text = await lookupWeather(
-            completionArguments.location
+            completionArguments.location,
           );
           history.push([question, completion_text]);
           messages.push({
@@ -225,7 +239,7 @@ app.post("/chatbot", async (req, res) => {
           });
         } else if (functionCallName === "lookupCarr") {
           const completionArguments = JSON.parse(
-            completionResponse.function_call.arguments
+            completionResponse.function_call.arguments,
           );
 
           const completion_text = await lookupCar(completionArguments.vin);

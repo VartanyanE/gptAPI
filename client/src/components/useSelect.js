@@ -1,37 +1,39 @@
 import React, { useState, useEffect } from "react";
 import "../styles/App.css";
 import axios from "axios";
-import UseForm from "./useForm";
 import Select from "react-select";
 
 const UseSelect = () => {
   // Define the state to manage the selected option
   const [selectedOption, setSelectedOption] = useState(""); // Set a default option
 
-  // Handle the change event when the user selects a different option
-  // const handleSelectChange = async (event) => {
-  //   setSelectedOption(event.target.value);
-  //   console.log(selectedOption);
-  //   const payload = {
-  //     message: selectedOption,
-  //   };
-  //   const response = await axios.post("/message", payload);
-  // };
-
-  // useEffect(() => {}, [selectedOption]);
   const options = [
     {
       value:
         "Answer every question like an elementary school teacher.  Use clear and precise language.  Include as much information as possible",
       label: "Elementary School Teacher",
+      assistant: "Hello, how can I help you today?",
+      userMessage: "Please answer the following question: ",
+    },
+    {
+      value: "Configurando el traductor al español.",
+      label: "Spanish Translator",
+      assistant: "Hola, ¿cómo puedo ayudarte hoy?",
+      userMessage: "Please translate the following text to Spanish: ",
+    },
+    {
+      value: "Fetching the weather forecast",
+      label: "Weather Forecast",
+      assistant: "Hello! How can I assist you with the weather",
+      userMessage: "Look up the weather forecast for:",
     },
     {
       value:
-        "You have been a Spanish translator for 10 years. Translate the entire user input into Spanish.",
-      label: "Spanish Translator",
+        "I want you to act as a travel guide. I will write you my location and you will suggest a place to visit near my location. In some cases, I will also give you the type of places I will visit. You will also suggest me places of similar type that are close to my first location. My first suggestion request is ",
+      label: "Travel Guide",
+      assistant: "",
+      userMessage: "Please suggest three places to visit near my location: ",
     },
-    { value: "jazz", label: "Jazz" },
-    { value: "orchestra", label: "Orchestra" },
   ];
 
   const handleChange = async (selectedOption) => {
