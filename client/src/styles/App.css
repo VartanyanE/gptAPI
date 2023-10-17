@@ -82,13 +82,27 @@ body {
   }
 
   .scrollable-text {
-    max-height: 50vh; /* Set the maximum height of the scrollable text */
+    max-height: 40vh; /* Set the maximum height of the scrollable text */
     overflow-y: auto; /* Enable vertical scrolling when the content exceeds max-height */
     padding: 16px; /* Optional padding for better readability */
    
     background-color: #f0f8ff; /* Optional background color */
   }
 
+  
+  .loading-spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #3498DB;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 .input-field:focus {
   border-color: #66b3ff;
 }
