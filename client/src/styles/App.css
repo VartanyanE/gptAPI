@@ -68,7 +68,7 @@ body {
   font-weight: bold;
   font-size: 20px;
   color: #8ab7e6;
-  margin-top:70px;
+  margin-top:20px;
   height: 80vh;
 
   text-transform: uppercase;
@@ -89,22 +89,8 @@ body {
     background-color: #f0f8ff; /* Optional background color */
   }
 
-  
-  .loading-spinner {
-    border: 4px solid rgba(255, 255, 255, 0.3);
-    border-top: 4px solid #3498DB;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 2s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
 .input-field:focus {
-  border-color: #66b3ff;
+  border-color: #66b  3ff;
 }
 
 /* Style for the submit button */
@@ -115,14 +101,14 @@ body {
   font-size: 18px;
   border: none;
   border-radius: 30px;
-  background-color: #FFE66D;
-  color: #FF6B6B;
+  background-color: #008080;
+  color: white;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .submit-button:hover {
-  background-color: #ff4949;
+  background-color: #008080;
 }
 
 .submit-button:active {
