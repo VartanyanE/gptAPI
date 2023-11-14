@@ -2,7 +2,6 @@ import React from "react";
 import UseForm from "./components/useForm";
 import UseSelect from "./components/useSelect";
 import "./styles/App.css";
-import CopyToClipboardButton from "./components/copyButton";
 
 const App = () => {
   const { formData, handleChange, handleSubmit } = UseForm();
@@ -27,7 +26,6 @@ const App = () => {
           Ask The Bot
         </button>
       </form>
-      <CopyToClipboardButton />
       {formData.response ? (
         <h3 className="post">
           <div className="scrollable-text">{formData.response}</div>{" "}
