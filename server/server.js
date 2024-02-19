@@ -109,16 +109,25 @@ app.post("/message", async (req, res) => {
 app.post("/image", async (req, res) => {
   const userPrompt = req.body.question;
   console.log(userPrompt);
-  const response = await openai.createImage({
-    model: "dall-e-3",
-    prompt: userPrompt,
-    n: 1,
-    size: "1024x1024",
-  });
-  // image_url = response.data.data[0].url;
-  console.log(response.data.data[0].url);
 
-  res.status(200).send(response.data.data[0].url);
+  try {
+    const response = await openai.createImage({
+      model: "dall-e-3",
+      prompt: userPrompt,
+      n: 1,
+      size: "1024x1024",
+    });
+    console.log(response.data.data[0].url);
+
+    res.status(200).send(response.data.data[0].url);
+  } catch (error) {
+    if (error.response) {
+      console.log(error.response.status);
+      console.log(error.response.data);
+    } else {
+      console.log(error.message);
+    }
+  }
 });
 
 app.post("/chatbot", async (req, res) => {

@@ -9,11 +9,11 @@ const App = () => {
   return (
     <div className="card">
       <div className="image-container">
-        <img src="ai.png" alt="Example Image" />
+        <img src="logo.png" alt="Example Image" />
       </div>
-      <div className="select">
+      {/* <div className="select">
         <UseSelect />
-      </div>
+      </div> */}
       <form className="form" onSubmit={handleSubmit}>
         <input
           className="input-field"
@@ -23,7 +23,7 @@ const App = () => {
           onChange={handleChange}
         />
         <button className="submit-button" type="submit">
-          Ask The Bot
+          Generate Image
         </button>
       </form>
       {formData.response ? (

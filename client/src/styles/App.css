@@ -9,7 +9,7 @@ p {
 }
 
 body {
-  background-color: #87CEEB;
+  background-color: #000102;
 }
 
 .card {
@@ -17,7 +17,7 @@ body {
   transition: 0.3s;
   border-radius: 5px;
   border-color: #ccc;
-  background-color: #AEE7FF;
+  background-color: #000102;
   height: 100vh;
   margin-top: 30px !important;
   margin: 20px;
@@ -54,7 +54,7 @@ body {
   background-color: #87CEEB;
   font-size: 16px;
   color: #555;
-  width: 98%;
+  width: 90%;
   transition: border-color 0.3s ease-in-out;
   
   /* height: 60px; */
@@ -64,8 +64,8 @@ body {
   grid-area:f;
 
   width: 300px; /* Adjust as needed */
-  height: 200px; /* Adjust as needed */
-  border: 2px solid #ccc; /* Border style and color */
+  height: 300px; /* Adjust as needed */
+  border: 2px solid #555; /* Border style and color */
   border-radius: 5px; /* Rounded corners */
   overflow: hidden; /* Hide overflow content */
 }
@@ -73,7 +73,7 @@ body {
 .image-generated img {
   width: 100%; /* Make the image fill the container */
   height: auto; /* Maintain aspect ratio */
-  display: block; /* Remove extra space below inline images */
+   /* Remove extra space below inline images */
 }
 
 
@@ -105,7 +105,7 @@ body {
   }
 
 .input-field:focus {
-  border-color: #66b  3ff;
+  border-color: #66b3ff;
 }
 
 /* Style for the submit button */
@@ -116,14 +116,14 @@ body {
   font-size: 18px;
   border: none;
   border-radius: 30px;
-  background-color: #008080;
-  color: white;
+  background-color: #edfcb9;
+  color: rgb(6, 5, 5);
   cursor: pointer;
   transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .submit-button:hover {
-  background-color: #008080;
+  background-color: #edfcb9;
 }
 
 .submit-button:active {
@@ -141,6 +141,7 @@ body {
   grid-area: t;
   padding-left: 350px;
   padding-right: 350px;
+  height: 130px;
 }
 
 /* Style for the image */
