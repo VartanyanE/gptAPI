@@ -27,9 +27,10 @@ const App = () => {
         </button>
       </form>
       {formData.response ? (
-        <h3 className="post">
-          <div className="scrollable-text">{formData.response}</div>{" "}
-        </h3>
+        <div className="image-generated">
+          {/* <div className="scrollable-text">{formData.response}</div>{" "} */}
+          <img src={formData.response} alt="React Image" />
+        </div>
       ) : (
         ""
       )}

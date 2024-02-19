@@ -60,6 +60,21 @@ body {
   /* height: 60px; */
   
 }
+.image-generated {
+  grid-area:f;
+
+  width: 300px; /* Adjust as needed */
+  height: 200px; /* Adjust as needed */
+  border: 2px solid #ccc; /* Border style and color */
+  border-radius: 5px; /* Rounded corners */
+  overflow: hidden; /* Hide overflow content */
+}
+
+.image-generated img {
+  width: 100%; /* Make the image fill the container */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Remove extra space below inline images */
+}
 
 
 .post {
