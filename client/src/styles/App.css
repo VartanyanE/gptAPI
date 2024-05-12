@@ -272,12 +272,13 @@ img {
         "b b b b b b b b b b b b"
         "n n n n n n n n n n n n"
         "o o o o o o o o o o o o"
-        "f f f f f f f f f f f f"
         "a a . . . . . . . . . ."
+        "f f f f f f f f f f f f"
+       
         "fn fn fn fn fn fn fn fn fn fn fn fn "
         "d d . . . . . . . . . .";
   
-      grid-template-rows:400px 80px 90px 60px 60px 60px 160px 60px;
+      grid-template-rows:80px 90px 90px 60px 60px;
     }
     .image-container {
    
@@ -289,6 +290,23 @@ img {
     img {
       height: 200%;
     }
+    .image-generated {
+      grid-area:f;
+      margin-top: 20px;
+      width: 100%; /* Adjust as needed */
+      height: 350px; /* Adjust as needed */
+      border: 2px solid #555; /* Border style and color */
+      border-radius: 5px; /* Rounded corners */
+      overflow: hidden; /* Hide overflow content */
+    }
+    
+    .image-generated img {
+      width: 100%; /* Make the image fill the container */
+      height: auto; /* Maintain aspect ratio */
+       /* Remove extra space below inline images */
+    }
+    
+    
   }
 
   @media (max-width: 420px) {
