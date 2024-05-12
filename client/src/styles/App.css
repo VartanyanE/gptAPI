@@ -262,6 +262,7 @@ img {
 
     grid-template-rows: 80px 80px 90px 60px 60px 60px 160px 60px;
   }
+  
 }
 
   @media (max-width: 600px) {
@@ -293,7 +294,7 @@ img {
     .image-generated {
       grid-area:f;
       margin-top: 20px;
-      width: 100%; /* Adjust as needed */
+      width: 420px; /* Adjust as needed */
       height: 350px; /* Adjust as needed */
       border: 2px solid #555; /* Border style and color */
       border-radius: 5px; /* Rounded corners */
@@ -322,6 +323,21 @@ img {
         "d d . . . . . . . . . .";
 
       grid-template-rows: 80px 90px 90px 60px 60px ;
+    }
+    .image-generated {
+      grid-area:f;
+      margin-top: 20px;
+      width: 100px; /* Adjust as needed */
+      height: 350px; /* Adjust as needed */
+      border: 2px solid #555; /* Border style and color */
+      border-radius: 5px; /* Rounded corners */
+      overflow: hidden; /* Hide overflow content */
+    }
+    
+    .image-generated img {
+      width: 100%; /* Make the image fill the container */
+      height: auto; /* Maintain aspect ratio */
+       /* Remove extra space below inline images */
     }
     
   }
