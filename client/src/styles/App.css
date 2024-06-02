@@ -294,8 +294,8 @@ img {
     .image-generated {
       grid-area:f;
       margin-top: 20px;
-      width: 420px; /* Adjust as needed */
-      height: 350px; /* Adjust as needed */
+      width: 320px; /* Adjust as needed */
+      height: 300px; /* Adjust as needed */
       border: 2px solid #555; /* Border style and color */
       border-radius: 5px; /* Rounded corners */
       overflow: hidden; /* Hide overflow content */
@@ -327,8 +327,8 @@ img {
     .image-generated {
       grid-area:f;
       margin-top: 20px;
-      width: 100px; /* Adjust as needed */
-      height: 350px; /* Adjust as needed */
+      width: 300px; /* Adjust as needed */
+      height: 300px; /* Adjust as needed */
       border: 2px solid #555; /* Border style and color */
       border-radius: 5px; /* Rounded corners */
       overflow: hidden; /* Hide overflow content */
