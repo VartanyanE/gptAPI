@@ -306,6 +306,16 @@ img {
       height: auto; /* Maintain aspect ratio */
        /* Remove extra space below inline images */
     }
+    .post {
+      grid-area:f;
+      margin-top: 20px;
+      width: 320px; /* Adjust as needed */
+      height: auto; /* Adjust as needed */
+      border: 2px solid #555; /* Border style and color */
+      border-radius: 5px; /* Rounded corners */
+      overflow: hidden; /* Hide overflow content */
+      
+    }
     
     
   }
@@ -339,6 +349,22 @@ img {
       height: auto; /* Maintain aspect ratio */
        /* Remove extra space below inline images */
     }
+    .post {
+      grid-area:f;
+      margin-top: 20px;
+      width: 300px; /* Adjust as needed */
+      height: 200px; /* Adjust as needed */
+      border: 2px solid #555; /* Border style and color */
+      border-radius: 5px; /* Rounded corners */
+      overflow: hidden; /* Hide overflow content */
+    }
+    
+    .image-generated img {
+      width: 100%; /* Make the image fill the container */
+      height: auto; /* Maintain aspect ratio */
+       /* Remove extra space below inline images */
+    }
+    
     
   }
     
