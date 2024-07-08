@@ -1,10 +1,10 @@
 import React from "react";
-import UseForm from "../components/useForm";
+import UseFormChatBot from "../components/useFormChatBot";
 import UseSelect from "../components/useSelect";
 import "../styles/App.css";
 
 const Chatbot = () => {
-  const { formData, handleChange, handleSubmit } = UseForm();
+  const { formData, handleChange, handleSubmit } = UseFormChatBot();
 
   return (
     <div className="card">
@@ -27,9 +27,8 @@ const Chatbot = () => {
         </button>
       </form>
       {formData.response ? (
-        <div className="image-generated">
-          {/* <div className="scrollable-text">{formData.response}</div>{" "} */}
-          <img src={formData.response} alt="React Image" />
+        <div className="post">
+          <div className="scrollable-text">{formData.response}</div>
         </div>
       ) : (
         ""

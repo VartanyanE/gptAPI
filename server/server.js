@@ -166,7 +166,7 @@ app.post("/chatbot", async (req, res) => {
 
     {
       const response = await openai.createChatCompletion({
-        model: "gpt-3.5-turbo-0613",
+        model: "gpt-4o",
         messages: messages,
         functions: [
           {
@@ -273,7 +273,7 @@ app.post("/chatbot", async (req, res) => {
           history.push([question, completion_text]);
         }
         const completion = await openai.createChatCompletion({
-          model: "gpt-3.5-turbo-0613",
+          model: "gpt-4o",
           messages: messages,
         });
 
