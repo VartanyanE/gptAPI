@@ -1,16 +1,18 @@
 import { Configuration, OpenAIApi } from "openai";
+import OpenAI from "openai";
 import * as dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
 import express from "express";
 import sgMail from "@sendgrid/mail"; // Use ES6 import for SendGrid module
 import axios from "axios";
-
+import fs from "fs";
+import path from "path";
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
-
+const openaI = new OpenAI();
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -18,6 +20,20 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("../client/build"));
 }
+
+const speechFile = path.resolve("./speech.mp3");
+
+async function main() {
+  // const mp3 = await openai.audio.speech.create({
+  //   model: "tts-1",
+  //   voice: "alloy",
+  //   input: "Today is a wonderful day to build something people love!",
+  // });
+  // console.log(openaI);
+  // const buffer = Buffer.from(await mp3.arrayBuffer());
+  // await fs.promises.writeFile(speechFile, buffer);
+}
+main();
 
 const sendEmail = async (to, from, subject, text) => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -95,7 +111,7 @@ let userMessage = null;
 
 app.get("/", async (req, res) => {
   res.status(200).send({
-    message: "Hello from CodeX!",
+    message: "Hello from Space!",
   });
 });
 
@@ -237,13 +253,13 @@ app.post("/chatbot", async (req, res) => {
         console.log("functionCallName: ", functionCallName);
         if (functionCallName === "sendEmail") {
           const completionArguments = JSON.parse(
-            completionResponse.function_call.arguments
+            completionResponse.function_call.arguments,
           );
           const completion_text = await sendEmail(
             completionArguments.to,
             completionArguments.from,
             completionArguments.subject,
-            completionArguments.text
+            completionArguments.text,
           );
 
           history.push([question, completion_text]);
@@ -253,11 +269,11 @@ app.post("/chatbot", async (req, res) => {
           //console.log(messages);
         } else if (functionCallName === "lookupWeather") {
           const completionArguments = JSON.parse(
-            completionResponse.function_call.arguments
+            completionResponse.function_call.arguments,
           );
 
           const completion_text = await lookupWeather(
-            completionArguments.location
+            completionArguments.location,
           );
           history.push([question, completion_text]);
           messages.push({
@@ -266,7 +282,7 @@ app.post("/chatbot", async (req, res) => {
           });
         } else if (functionCallName === "lookupCarr") {
           const completionArguments = JSON.parse(
-            completionResponse.function_call.arguments
+            completionResponse.function_call.arguments,
           );
 
           const completion_text = await lookupCar(completionArguments.vin);
