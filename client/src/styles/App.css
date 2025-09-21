@@ -1,370 +1,88 @@
-* {
-  font-family: Arial, Helvetica, sans-serifß;
-}
-
-p {
-  display: inline;
-  font-size: 13px;
-  margin-bottom: 5px !important;
-}
-
+/* General layout */
 body {
-  background-color: #000102;
+  font-family: Arial, sans-serif;
+  background-color: #f5f6fa;
+  margin: 0;
+  padding: 0;
 }
 
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-  border-radius: 5px;
-  border-color: #ccc;
-  background-color: #000102;
-  height: 100vh;
-  margin-top: 30px !important;
-  margin: 20px;
-  padding-left: 20px;
-  padding-top: 30px;
-  padding-right: 20px;
-  display: grid;
-  grid-gap: 3px;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 300px 100px 60px 200px 60px 60px 60px 300px;
-  grid-template-areas:
-  "t t t t t t t t t t t t"
-  "t t t t t t t t t t t t"
-  "n n n n n n n n n n n n"
-  "o o o o o o o o o o o o"
-  "f f f f f f f f f f f f"
-  "a a . . . . . . . . . ."
-  "fn fn fn fn fn fn fn fn fn fn fn fn "
-  "d d . . . . . . . . . .";
-
+/* Page wrapper */
+.container {
+  padding: 16px;
+  max-width: 500px;
+  margin: auto;
 }
 
-.form{
-  grid-area: o;
-}
-/* Style for the input fields */
-.input-field {
-  
-  padding: 10px;
-  margin-bottom: 15px;
-  margin-top: 0px;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-  background-color: #87CEEB;
-  font-size: 16px;
-  color: #555;
-  width: 90%;
-  transition: border-color 0.3s ease-in-out;
-  
-  /* height: 60px; */
-  
-}
-.image-generated {
-  grid-area:f;
-
-  width: 300px; /* Adjust as needed */
-  height: 300px; /* Adjust as needed */
-  border: 2px solid #555; /* Border style and color */
-  border-radius: 5px; /* Rounded corners */
-  overflow: hidden; /* Hide overflow content */
-}
-
-.image-generated img {
-  width: 100%; /* Make the image fill the container */
-  height: auto; /* Maintain aspect ratio */
-   /* Remove extra space below inline images */
-}
-
-
-.post {
-  grid-area:f;
-  font-family: 'Roboto', sans-serif;
-  font-weight: bold;
-  font-size: 20px;
-  color: #8ab7e6;
-  margin-top:20px;
-  height: 80vh;
-
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  animation: neon-glow 1.5s ease-in-out infinite alternate;
-  opacity: 0; /* Hide the text initially */
-    animation: appear 0.5s ease-in-out forwards; /* Apply the animation */
-    animation-delay: 0.5s; /* Add a delay to stagger the animations */
-    overflow: hidden;
-  }
-
-  .scrollable-text {
-    max-height: 40vh; /* Set the maximum height of the scrollable text */
-    overflow-y: auto; /* Enable vertical scrolling when the content exceeds max-height */
-    padding: 16px; /* Optional padding for better readability */
-   
-    background-color: #f0f8ff; /* Optional background color */
-  }
-
-.input-field:focus {
-  border-color: #66b3ff;
-}
-
-/* Style for the submit button */
-.submit-button {
-  display: inline-block;
-  grid-area: f;
-  padding: 12px 20px;
-  font-size: 18px;
-  border: none;
-  border-radius: 30px;
-  background-color: #edfcb9;
-  color: rgb(6, 5, 5);
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
-}
-
-.submit-button:hover {
-  background-color: #edfcb9;
-}
-
-.submit-button:active {
-  transform: scale(0.95);
-}
-
-/* Adding a shadow to the button for depth */
-.submit-button {
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.image-container {
- 
-  /* Adjust as needed */
-  grid-area: t;
-  padding-left: 350px;
-  padding-right: 350px;
-  height: 130px;
-}
-
-/* Style for the image */
-img {
-  width: 100%;
-  height: 80%;
-}
-
-
-@keyframes appear {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes neon-glow {
-  from {
-    text-shadow: 2px 2px 4px rgba(0, 0, 255, 0.2);
-  }
-  to {
-    text-shadow: 0px 0px 8px rgba(0, 204, 255, 0.8);
-  }
-}
-@keyframes vibrate {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-10px);
-  }
-  50% {
-    transform: translateX(10px);
-  }
-  75% {
-    transform: translateX(-10px);
-  }
-}
-
-.select-container {
+/* Title */
+.title {
   text-align: center;
-  
-  
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  width: 300px;
-  margin: 0 auto;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 16px;
 }
 
-.custom-select {
-  width: 100%;
-  padding: 10px;
+/* Each card */
+.card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+/* Header row inside card */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.symbol {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.iv {
   font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  outline: none;
-  background-color: #fff;
+  font-weight: bold;
 }
 
-.custom-select:hover {
-  border-color: #3498DB;
+/* Color codes for IV */
+.iv-high {
+  color: #d90429; /* red */
 }
 
-.custom-select:focus {
-  border-color: #3498DB;
-  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+.iv-medium {
+  color: #f77f00; /* orange */
 }
 
-.select{
-  grid-area: n;
+.iv-normal {
+  color: #e9c46a; /* yellow */
 }
 
-
-/*  Media Queries */
-
-@media (max-width: 1200px) {
-  .card {
-    grid-template-areas:
-      "t t t t t t t t t t t t"
-      "t t t t t t t t t t t t"
-      "b b b b b b b b b b b b"
-      "n n n n n n n n n n n n"
-      "o o o o o o o o o o o o"
-      "f f f f f f f f f f f f"
-      "a a . . . . . . . . . ."
-      "fn fn fn fn fn fn fn fn fn fn fn fn "
-      "d d . . . . . . . . . .";
-
-    grid-template-rows:300px 80px 90px 60px 60px 60px 160px 60px;
-  }
-  .image-container {
- 
-    /* Adjust as needed */
-    grid-area: t;
-    padding-left: 0;
-    padding-right: 0;
-  }
-  img {
-    height: 100%;
-  }
+.iv-low {
+  color: #2a9d8f; /* green */
 }
 
-
-@media (max-width: 980px) {
-  .card {
-    grid-template-areas:
-      "t t t t t t t t t t t t"
-      "b b b b b b b b b b b b"
-      "n n n n n n n n n n n n"
-      "o o o o o o o o o o o o"
-      "f f f f f f f f f f f f"
-      "a a . . . . . . . . . ."
-      "fn fn fn fn fn fn fn fn fn fn fn fn "
-      "d d . . . . . . . . . .";
-
-    grid-template-rows: 80px 80px 90px 60px 60px 60px 160px 60px;
-  }
-  
+/* Grid for details */
+.card-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 6px;
+  font-size: 14px;
 }
 
-  @media (max-width: 600px) {
-    .card {
-      grid-template-areas:
-        "t t t t t t t t t t t t"
-        "t t t t t t t t t t t t"
-        "b b b b b b b b b b b b"
-        "n n n n n n n n n n n n"
-        "o o o o o o o o o o o o"
-        "a a . . . . . . . . . ."
-        "f f f f f f f f f f f f"
-       
-        "fn fn fn fn fn fn fn fn fn fn fn fn "
-        "d d . . . . . . . . . .";
-  
-      grid-template-rows:80px 90px 90px 60px 60px;
-    }
-    .image-container {
-   
-      /* Adjust as needed */
-      grid-area: t;
-      padding-left: 0;
-      padding-right: 0;
-    }
-    img {
-      height: 200%;
-    }
-    .image-generated {
-      grid-area:f;
-      margin-top: 20px;
-      width: 320px; /* Adjust as needed */
-      height: 300px; /* Adjust as needed */
-      border: 2px solid #555; /* Border style and color */
-      border-radius: 5px; /* Rounded corners */
-      overflow: hidden; /* Hide overflow content */
-    }
-    
-    .image-generated img {
-      width: 100%; /* Make the image fill the container */
-      height: auto; /* Maintain aspect ratio */
-       /* Remove extra space below inline images */
-    }
-    .post {
-      grid-area:f;
-      margin-top: 20px;
-      width: 320px; /* Adjust as needed */
-      height: auto; /* Adjust as needed */
-      border: 2px solid #555; /* Border style and color */
-      border-radius: 5px; /* Rounded corners */
-      overflow: hidden; /* Hide overflow content */
-      
-    }
-    
-    
-  }
+.label {
+  color: #666;
+}
 
-  @media (max-width: 420px) {
-    .card {
-      grid-template-areas:
-        "t t t t t t t t t t t t"
-        "b b b b b b b b b b b b"
-        "n n n n n n n n n n n n"
-        "o o o o o o o o o o o o"
-        "a a . . . . . . . . . ."
-        "f f f f f f f f f f f f"
-        "fn fn fn fn fn fn fn fn fn fn fn fn "
-        "d d . . . . . . . . . .";
-
-      grid-template-rows: 80px 90px 90px 60px 60px ;
-    }
-    .image-generated {
-      grid-area:f;
-      margin-top: 20px;
-      width: 300px; /* Adjust as needed */
-      height: 300px; /* Adjust as needed */
-      border: 2px solid #555; /* Border style and color */
-      border-radius: 5px; /* Rounded corners */
-      overflow: hidden; /* Hide overflow content */
-    }
-    
-    .image-generated img {
-      width: 100%; /* Make the image fill the container */
-      height: auto; /* Maintain aspect ratio */
-       /* Remove extra space below inline images */
-    }
-    .post {
-      grid-area:f;
-      margin-top: 20px;
-      width: 300px; /* Adjust as needed */
-      height: 200px; /* Adjust as needed */
-      border: 2px solid #555; /* Border style and color */
-      border-radius: 5px; /* Rounded corners */
-      overflow: hidden; /* Hide overflow content */
-    }
-    
-    .image-generated img {
-      width: 100%; /* Make the image fill the container */
-      height: auto; /* Maintain aspect ratio */
-       /* Remove extra space below inline images */
-    }
-    
-    
-  }
-    
+.value {
+  font-weight: 500;
+}
